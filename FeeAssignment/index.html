@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notepad</title>
+
+    <style>
+        #textInput{
+            height: 450px;
+            width: 600px;
+            margin-left: 440px;
+}
+
+        h1{
+            padding-left: 680px;
+        }
+        .button{
+            margin-left: 680px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Notepad</h1>
+    <div class="nintendo">
+        
+        <div class="textarea-container">
+            <textarea id="textInput"></textarea>
+        </div>
+    </div>
+    <br>
+    <div class="button">
+        <button onclick="saveText()">Save</button>
+        <button onclick="clearSave()">Clear</button>
+    </div>
+    <script>
+        // Function to load saved text from Local Storage
+        function loadSavedText() {
+            const fileName = "myText.txt";
+            const savedText = localStorage.getItem(fileName);
+
+            if (savedText) {
+                document.getElementById('textInput').value = savedText;
+            }
+        }
+
+        // Call the loadSavedText function when the page loads
+        window.onload = loadSavedText;
+
+        // Function to save text to Local Storage
+        function saveText() {
+            const textToSave = document.getElementById('textInput').value;
+
+            if (textToSave.trim() === "") {
+                alert("Please enter some text to save.");
+                return;
+            }
+
+            const fileName = "myText.txt";
+            localStorage.setItem(fileName, textToSave);
+
+            alert(`Text saved as ${fileName}`);
+        }
+
+        // Function to clear saved text from Local Storage
+        function clearSave() {
+            const fileName = "myText.txt";
+            localStorage.removeItem(fileName);
+            document.getElementById('textInput').value = '';
+            alert(`File "${fileName}" deleted.`);
+        }
+    </script>
+</body>
+</html>
+</html>
